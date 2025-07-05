@@ -1,14 +1,14 @@
 import type { CollectionConfig } from 'payload'
 
-export const Questions: CollectionConfig = {
-  slug: 'questions',
-  access: {
-    read: () => true,
-  },
+export const Classroom: CollectionConfig = {
+  slug: 'classroom',
+  //   access: {
+  //     read: () => true,
+  //   },
   fields: [
     {
       name: 'title',
-      type: 'richText',
+      type: 'text',
       required: true,
     },
   ],
