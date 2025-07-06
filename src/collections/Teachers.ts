@@ -2,13 +2,21 @@ import type { CollectionConfig } from 'payload'
 
 export const Teachers: CollectionConfig = {
   slug: 'teachers',
-  access: {
-    read: () => true,
+  // access: {
+  //   read: () => true,
+  // },
+  admin: {
+    useAsTitle: 'Name',
   },
   fields: [
     {
-      name: 'title',
-      type: 'richText',
+      name: 'Name',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'Email',
+      type: 'email',
       required: true,
     },
   ],

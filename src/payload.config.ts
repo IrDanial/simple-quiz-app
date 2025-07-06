@@ -8,7 +8,6 @@ import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
 import { Users } from './collections/Users'
-import { Media } from './collections/Media'
 import { Questions } from './collections/Questions'
 import { Classroom } from './collections/Classroom'
 import { Schedules } from './collections/Schedules'
@@ -30,7 +29,6 @@ export default buildConfig({
   },
   collections: [
     Users,
-    Media,
     Questions,
     Classroom,
     Schedules,

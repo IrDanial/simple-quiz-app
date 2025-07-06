@@ -6,19 +6,20 @@ export const Grades: CollectionConfig = {
     read: () => true,
   },
   admin: {
-    useAsTitle: 'name',
+    useAsTitle: 'Student',
   },
 
   fields: [
     {
-      name: 'name',
+      name: 'Student',
       type: 'text',
       required: true,
     },
     {
-      name: 'birtdate',
-      type: 'text',
+      name: 'grade',
+      type: 'number',
+      required: true,
     },
   ],
-  //   upload: true,
+  // upload: true,
 }

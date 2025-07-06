@@ -6,18 +6,19 @@ export const Answers: CollectionConfig = {
     read: () => true,
   },
   admin: {
-    useAsTitle: 'name',
+    useAsTitle: 'Question',
   },
 
   fields: [
     {
-      name: 'name',
+      name: 'Question',
       type: 'text',
       required: true,
     },
     {
-      name: 'birtdate',
+      name: 'Answer',
       type: 'text',
+      required: true,
     },
   ],
   //   upload: true,

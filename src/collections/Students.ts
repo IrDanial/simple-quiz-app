@@ -16,8 +16,9 @@ export const Students: CollectionConfig = {
       required: true,
     },
     {
-      name: 'birtdate',
-      type: 'text',
+      name: 'birthdate',
+      type: 'date',
+      required: true,
     },
   ],
   //   upload: true,

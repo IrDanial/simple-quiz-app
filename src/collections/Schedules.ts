@@ -2,13 +2,21 @@ import type { CollectionConfig } from 'payload'
 
 export const Schedules: CollectionConfig = {
   slug: 'schedules',
-  access: {
-    read: () => true,
+  // access: {
+  //   read: () => true,
+  // },
+  admin: {
+    useAsTitle: 'title',
   },
   fields: [
     {
       name: 'title',
-      type: 'richText',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'Date',
+      type: 'date',
       required: true,
     },
   ],

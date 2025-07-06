@@ -68,7 +68,6 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
-    media: Media;
     questions: Question;
     classroom: Classroom;
     schedules: Schedule;
@@ -84,7 +83,6 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
     questions: QuestionsSelect<false> | QuestionsSelect<true>;
     classroom: ClassroomSelect<false> | ClassroomSelect<true>;
     schedules: SchedulesSelect<false> | SchedulesSelect<true>;
@@ -155,44 +153,11 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: string;
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "questions".
  */
 export interface Question {
   id: string;
-  title: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
+  title: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -203,6 +168,7 @@ export interface Question {
 export interface Classroom {
   id: string;
   title: string;
+  'Student Count': number;
   updatedAt: string;
   createdAt: string;
 }
@@ -212,21 +178,8 @@ export interface Classroom {
  */
 export interface Schedule {
   id: string;
-  title: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
+  title: string;
+  Date: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -236,21 +189,8 @@ export interface Schedule {
  */
 export interface Teacher {
   id: string;
-  title: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
+  Name: string;
+  Email: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -261,7 +201,7 @@ export interface Teacher {
 export interface Student {
   id: string;
   name: string;
-  birtdate?: string | null;
+  birthdate: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -296,8 +236,8 @@ export interface Trial {
  */
 export interface Answer {
   id: string;
-  name: string;
-  birtdate?: string | null;
+  Question: string;
+  Answer: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -307,8 +247,8 @@ export interface Answer {
  */
 export interface Grade {
   id: string;
-  name: string;
-  birtdate?: string | null;
+  Student: string;
+  grade: number;
   updatedAt: string;
   createdAt: string;
 }
@@ -322,10 +262,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: string | User;
-      } | null)
-    | ({
-        relationTo: 'media';
-        value: string | Media;
       } | null)
     | ({
         relationTo: 'questions';
@@ -425,24 +361,6 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
- */
-export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "questions_select".
  */
 export interface QuestionsSelect<T extends boolean = true> {
@@ -456,6 +374,7 @@ export interface QuestionsSelect<T extends boolean = true> {
  */
 export interface ClassroomSelect<T extends boolean = true> {
   title?: T;
+  'Student Count'?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -465,6 +384,7 @@ export interface ClassroomSelect<T extends boolean = true> {
  */
 export interface SchedulesSelect<T extends boolean = true> {
   title?: T;
+  Date?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -473,7 +393,8 @@ export interface SchedulesSelect<T extends boolean = true> {
  * via the `definition` "teachers_select".
  */
 export interface TeachersSelect<T extends boolean = true> {
-  title?: T;
+  Name?: T;
+  Email?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -483,7 +404,7 @@ export interface TeachersSelect<T extends boolean = true> {
  */
 export interface StudentsSelect<T extends boolean = true> {
   name?: T;
-  birtdate?: T;
+  birthdate?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -502,8 +423,8 @@ export interface TrialsSelect<T extends boolean = true> {
  * via the `definition` "answers_select".
  */
 export interface AnswersSelect<T extends boolean = true> {
-  name?: T;
-  birtdate?: T;
+  Question?: T;
+  Answer?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -512,8 +433,8 @@ export interface AnswersSelect<T extends boolean = true> {
  * via the `definition` "grades_select".
  */
 export interface GradesSelect<T extends boolean = true> {
-  name?: T;
-  birtdate?: T;
+  Student?: T;
+  grade?: T;
   updatedAt?: T;
   createdAt?: T;
 }

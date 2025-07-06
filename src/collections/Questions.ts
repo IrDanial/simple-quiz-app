@@ -12,7 +12,7 @@ export const Questions: CollectionConfig = {
   fields: [
     {
       name: 'title',
-      type: 'richText',
+      type: 'text',
       required: true,
     },
   ],
