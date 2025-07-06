@@ -10,6 +10,13 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Questions } from './collections/Questions'
+import { Classroom } from './collections/Classroom'
+import { Schedules } from './collections/Schedules'
+import { Teachers } from './collections/Teachers'
+import { Students } from './collections/Students'
+import { Trials } from './collections/Trials'
+import { Answers } from './collections/Answers'
+import { Grades } from './collections/Grades'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -21,7 +28,18 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Questions],
+  collections: [
+    Users,
+    Media,
+    Questions,
+    Classroom,
+    Schedules,
+    Teachers,
+    Students,
+    Trials,
+    Answers,
+    Grades,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
