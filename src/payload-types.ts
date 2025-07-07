@@ -173,17 +173,7 @@ export interface Classroom {
   id: string;
   title: string;
   'Student Count': number;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "schedules".
- */
-export interface Schedule {
-  id: string;
-  title: string;
-  Date: string;
+  Teacher?: (string | null) | Teacher;
   updatedAt: string;
   createdAt: string;
 }
@@ -195,6 +185,18 @@ export interface Teacher {
   id: string;
   Name: string;
   Email: string;
+  NIP: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "schedules".
+ */
+export interface Schedule {
+  id: string;
+  title: string;
+  Date: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -397,6 +399,7 @@ export interface EssaysSelect<T extends boolean = true> {
 export interface ClassroomSelect<T extends boolean = true> {
   title?: T;
   'Student Count'?: T;
+  Teacher?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -417,6 +420,7 @@ export interface SchedulesSelect<T extends boolean = true> {
 export interface TeachersSelect<T extends boolean = true> {
   Name?: T;
   Email?: T;
+  NIP?: T;
   updatedAt?: T;
   createdAt?: T;
 }

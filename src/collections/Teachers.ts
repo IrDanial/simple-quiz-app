@@ -19,6 +19,11 @@ export const Teachers: CollectionConfig = {
       type: 'email',
       required: true,
     },
+    {
+      name: 'NIP',
+      type: 'number',
+      required: true,
+    },
   ],
   //   upload: true,
 }

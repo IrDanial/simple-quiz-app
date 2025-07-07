@@ -19,6 +19,11 @@ export const Classroom: CollectionConfig = {
       type: 'number',
       required: true,
     },
+    {
+      name: 'Teacher',
+      type: 'relationship',
+      relationTo: 'teachers',
+    },
   ],
   //   upload: true,
 }
