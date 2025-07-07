@@ -68,7 +68,7 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
-    questions: Question;
+    essays: Essay;
     classroom: Classroom;
     schedules: Schedule;
     teachers: Teacher;
@@ -76,6 +76,7 @@ export interface Config {
     trials: Trial;
     answers: Answer;
     grades: Grade;
+    multichoices: Multichoice;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -83,7 +84,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
-    questions: QuestionsSelect<false> | QuestionsSelect<true>;
+    essays: EssaysSelect<false> | EssaysSelect<true>;
     classroom: ClassroomSelect<false> | ClassroomSelect<true>;
     schedules: SchedulesSelect<false> | SchedulesSelect<true>;
     teachers: TeachersSelect<false> | TeachersSelect<true>;
@@ -91,6 +92,7 @@ export interface Config {
     trials: TrialsSelect<false> | TrialsSelect<true>;
     answers: AnswersSelect<false> | AnswersSelect<true>;
     grades: GradesSelect<false> | GradesSelect<true>;
+    multichoices: MultichoicesSelect<false> | MultichoicesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -153,11 +155,13 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "questions".
+ * via the `definition` "essays".
  */
-export interface Question {
+export interface Essay {
   id: string;
+  subject: string;
   title: string;
+  answer?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -254,6 +258,18 @@ export interface Grade {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "multichoices".
+ */
+export interface Multichoice {
+  id: string;
+  subject: string;
+  title: string;
+  answer: 'draft' | 'review' | 'published';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -264,8 +280,8 @@ export interface PayloadLockedDocument {
         value: string | User;
       } | null)
     | ({
-        relationTo: 'questions';
-        value: string | Question;
+        relationTo: 'essays';
+        value: string | Essay;
       } | null)
     | ({
         relationTo: 'classroom';
@@ -294,6 +310,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'grades';
         value: string | Grade;
+      } | null)
+    | ({
+        relationTo: 'multichoices';
+        value: string | Multichoice;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -361,10 +381,12 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "questions_select".
+ * via the `definition` "essays_select".
  */
-export interface QuestionsSelect<T extends boolean = true> {
+export interface EssaysSelect<T extends boolean = true> {
+  subject?: T;
   title?: T;
+  answer?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -435,6 +457,17 @@ export interface AnswersSelect<T extends boolean = true> {
 export interface GradesSelect<T extends boolean = true> {
   Student?: T;
   grade?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "multichoices_select".
+ */
+export interface MultichoicesSelect<T extends boolean = true> {
+  subject?: T;
+  title?: T;
+  answer?: T;
   updatedAt?: T;
   createdAt?: T;
 }

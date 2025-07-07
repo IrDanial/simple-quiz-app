@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
 import { Users } from './collections/Users'
-import { Questions } from './collections/Questions'
+import { Essays } from './collections/Essays'
 import { Classroom } from './collections/Classroom'
 import { Schedules } from './collections/Schedules'
 import { Teachers } from './collections/Teachers'
@@ -16,6 +16,7 @@ import { Students } from './collections/Students'
 import { Trials } from './collections/Trials'
 import { Answers } from './collections/Answers'
 import { Grades } from './collections/Grades'
+import { Multichoices } from './collections/Multichoices'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -29,7 +30,7 @@ export default buildConfig({
   },
   collections: [
     Users,
-    Questions,
+    Essays,
     Classroom,
     Schedules,
     Teachers,
@@ -37,6 +38,7 @@ export default buildConfig({
     Trials,
     Answers,
     Grades,
+    Multichoices,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
