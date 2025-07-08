@@ -17,10 +17,37 @@ import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Eye, EyeOff } from 'lucide-react'
 import { createUser } from '@/app/actions/createUser'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 
 export default function RegistrationForm() {
   const [showPassword, setShowPassword] = useState(false)
   // Removed showConfirmPassword state
+
+  // const createUser = async (data: { fullname: string; email: string; password: string }) => {
+  //   const payload = await getPayload({ config })
+
+  //   try {
+  //     const newUser = await payload.create({
+  //       collection: 'users',
+  //       data: {
+  //         fullName: data.fullname,
+  //         email: data.email,
+  //         password: data.password,
+  //       },
+  //     })
+
+  //     return {
+  //       success: true,
+  //       user: newUser,
+  //     }
+  //   } catch (error: any) {
+  //     return {
+  //       success: false,
+  //       error: error.message,
+  //     }
+  //   }
+  // }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
