@@ -5,10 +5,12 @@ export const Users: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
   },
+  access: {
+    create: () => true,
+    read: () => true,
+  },
   auth: true,
   fields: [
-    // SHould be object
-    // camelCase
     {
       name: 'fullName',
       type: 'text',

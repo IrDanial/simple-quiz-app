@@ -16,6 +16,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Eye, EyeOff } from 'lucide-react'
+import { createUser } from '@/app/actions/createUser'
 
 export default function RegistrationForm() {
   const [showPassword, setShowPassword] = useState(false)
@@ -27,18 +28,20 @@ export default function RegistrationForm() {
     // Get form data
     const formData = new FormData(e.target as HTMLFormElement)
     const data = {
-      fullName: formData.get('fullName') as string,
+      fullname: formData.get('fullName') as string,
       email: formData.get('email') as string,
       password: formData.get('password') as string,
-      termsAccepted: formData.get('terms') === 'on',
+      //   termsAccepted: formData.get('terms') === 'on',
     }
+
+    createUser(data)
 
     // Log the form data
     console.log('Registration Form Data:', data)
-    console.log('Full Name:', data.fullName)
+    console.log('Full Name:', data.fullname)
     console.log('Email:', data.email)
     console.log('Password Length:', data.password.length)
-    console.log('Terms Accepted:', data.termsAccepted)
+    // console.log('Terms Accepted:', data.termsAccepted)
 
     // You can also log as a formatted table for better readability
     console.table(data)
