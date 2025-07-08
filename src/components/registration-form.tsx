@@ -72,6 +72,7 @@ export default function RegistrationForm() {
 
     // You can also log as a formatted table for better readability
     console.table(data)
+    ;(e.target as HTMLFormElement).reset()
   }
 
   return (
@@ -83,9 +84,8 @@ export default function RegistrationForm() {
             Enter your information to create your account
           </CardDescription>
         </CardHeader>
-        <form onSubmit={handleSubmit}>
+        <form id="form" onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
-            {/* Replaced first/last name grid with full name */}
             <div className="space-y-2">
               <Label htmlFor="fullName">Full Name</Label>
               <Input id="fullName" name="fullName" placeholder="John Doe" required />
@@ -148,7 +148,7 @@ export default function RegistrationForm() {
           </CardContent>
 
           <CardFooter className="flex flex-col space-y-4">
-            <Button type="submit" className="w-full">
+            <Button id="button" type="submit" className="w-full">
               Create Account
             </Button>
             <p className="text-center text-sm text-muted-foreground">
