@@ -18,6 +18,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Eye, EyeOff } from 'lucide-react'
 import { createUser } from '@/app/actions/createUser'
 import Swal from 'sweetalert2'
+import { useRouter } from 'next/navigation'
 // import { getPayload } from 'payload'
 // import config from '@payload-config'
 
@@ -50,7 +51,8 @@ export default function RegistrationForm() {
   //   }
   // }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const router = useRouter()
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     // Get form data
@@ -62,25 +64,9 @@ export default function RegistrationForm() {
       //   termsAccepted: formData.get('terms') === 'on',
     }
 
-    createUser(data)
+    await createUser(data)
 
-    // Log the form data
-    console.log('Registration Form Data:', data)
-    console.log('Full Name:', data.fullname)
-    console.log('Email:', data.email)
-    console.log('Password Length:', data.password.length)
-    // console.log('Terms Accepted:', data.termsAccepted)
-
-    // You can also log as a formatted table for better readability
-    console.table(data)
-    ;(e.target as HTMLFormElement).reset()
-
-    Swal.fire({
-      title: 'Error!',
-      text: 'Do you want to continue',
-      icon: 'error',
-      confirmButtonText: 'Cool',
-    })
+    router.replace('/')
   }
 
   return (
