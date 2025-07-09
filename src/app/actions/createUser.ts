@@ -1,8 +1,8 @@
-// app/actions/createUser.ts
 'use server'
 
 import { getPayload } from 'payload'
 import config from '@payload-config'
+// import swal from 'sweetalert';
 
 export const createUser = async (data: { fullname: string; email: string; password?: string }) => {
   const payload = await getPayload({ config })
