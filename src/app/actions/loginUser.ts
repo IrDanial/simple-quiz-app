@@ -3,7 +3,6 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { cookies } from 'next/headers'
-// import swal from 'sweetalert';
 
 export const loginUser = async (data: { email: string; password: string }) => {
   const payload = await getPayload({ config })
