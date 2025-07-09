@@ -18,6 +18,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Eye, EyeOff } from 'lucide-react'
 import { createUser } from '@/app/actions/createUser'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 export default function RegistrationForm() {
   const [showPassword, setShowPassword] = useState(false)
@@ -116,9 +117,9 @@ export default function RegistrationForm() {
             </Button>
             <p className="text-center text-sm text-muted-foreground">
               Already have an account?{' '}
-              <a href="#" className="text-primary underline hover:no-underline">
+              <Link href="/auth/login" className="text-primary underline hover:no-underline">
                 Sign in
-              </a>
+              </Link>
             </p>
           </CardFooter>
         </form>

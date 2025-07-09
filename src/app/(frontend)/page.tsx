@@ -1,8 +1,5 @@
 import React from 'react'
 
-// import { headers as nextHeaders } from 'next/headers'
-// import { getPayload } from 'payload'
-// import config from '@payload-config'
 import SignOut from '@/components/SignOut'
 import { authorizeUser } from '../actions/AuthorizeUser'
 import { redirect } from 'next/navigation'

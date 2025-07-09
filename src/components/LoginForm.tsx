@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label'
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react'
 import { loginUser } from '@/app/actions/loginUser'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
@@ -104,9 +105,9 @@ export default function LoginForm() {
             {/* Sign Up Link */}
             <div className="text-center text-sm">
               Don&apos;t have an account?{' '}
-              <a href="#" className="text-blue-600 hover:underline font-medium">
+              <Link href="/auth/register" className="text-blue-600 hover:underline font-medium">
                 Sign up
-              </a>
+              </Link>
             </div>
           </form>
         </CardContent>
