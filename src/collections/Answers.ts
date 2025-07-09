@@ -21,5 +21,4 @@ export const Answers: CollectionConfig = {
       required: true,
     },
   ],
-  //   upload: true,
 }

@@ -18,37 +18,9 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Eye, EyeOff } from 'lucide-react'
 import { createUser } from '@/app/actions/createUser'
 import { useRouter } from 'next/navigation'
-// import { getPayload } from 'payload'
-// import config from '@payload-config'
 
 export default function RegistrationForm() {
   const [showPassword, setShowPassword] = useState(false)
-  // Removed showConfirmPassword state
-
-  // const createUser = async (data: { fullname: string; email: string; password: string }) => {
-  //   const payload = await getPayload({ config })
-
-  //   try {
-  //     const newUser = await payload.create({
-  //       collection: 'users',
-  //       data: {
-  //         fullName: data.fullname,
-  //         email: data.email,
-  //         password: data.password,
-  //       },
-  //     })
-
-  //     return {
-  //       success: true,
-  //       user: newUser,
-  //     }
-  //   } catch (error: any) {
-  //     return {
-  //       success: false,
-  //       error: error.message,
-  //     }
-  //   }
-  // }
 
   const router = useRouter()
 
@@ -61,23 +33,11 @@ export default function RegistrationForm() {
       fullname: formData.get('fullName') as string,
       email: formData.get('email') as string,
       password: formData.get('password') as string,
-      //   termsAccepted: formData.get('terms') === 'on',
     }
 
     await createUser(data)
 
     router.replace('/')
-
-    // // Log the form data
-    // console.log('Registration Form Data:', data)
-    // console.log('Full Name:', data.fullname)
-    // console.log('Email:', data.email)
-    // console.log('Password Length:', data.password.length)
-    // // console.log('Terms Accepted:', data.termsAccepted)
-
-    // // You can also log as a formatted table for better readability
-    // console.table(data)
-    // ;(e.target as HTMLFormElement).reset()
   }
 
   return (

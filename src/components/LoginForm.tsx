@@ -28,7 +28,6 @@ export default function LoginForm() {
     })
 
     router.replace('/')
-    // console.log(data)
   }
 
   const handleInputChange = (field: string, value: string) => {
