@@ -11,7 +11,6 @@ export default async function HomePage() {
   if (result.user) {
     return (
       <div>
-        <Navbar user={result.user}></Navbar>
         <SignOut user={result.user}></SignOut>
       </div>
     )

@@ -31,7 +31,7 @@ const HomeIcon = () => (
  * @param {{ user: User }} props - The props for the component, including the user object.
  * @returns {JSX.Element} The rendered navbar component.
  */
-const Navbar = (props: { user: User }) => {
+const Navbar = () => {
   const router = useRouter()
   return (
     <nav className="bg-gray-800 text-white shadow-lg">
