@@ -136,6 +136,7 @@ export interface UserAuthOperations {
 export interface User {
   id: string;
   fullName: string;
+  role: 'Student' | 'Teacher';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -267,7 +268,26 @@ export interface Multichoice {
   id: string;
   subject: string;
   title: string;
-  answer: 'draft' | 'review' | 'published';
+  question: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  answer: {
+    jawaban: string;
+    isCorrect: boolean;
+    id?: string | null;
+  }[];
   updatedAt: string;
   createdAt: string;
 }
@@ -366,6 +386,7 @@ export interface PayloadMigration {
  */
 export interface UsersSelect<T extends boolean = true> {
   fullName?: T;
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -473,7 +494,14 @@ export interface GradesSelect<T extends boolean = true> {
 export interface MultichoicesSelect<T extends boolean = true> {
   subject?: T;
   title?: T;
-  answer?: T;
+  question?: T;
+  answer?:
+    | T
+    | {
+        jawaban?: T;
+        isCorrect?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

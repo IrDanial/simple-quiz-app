@@ -16,6 +16,12 @@ export const Users: CollectionConfig = {
       type: 'text',
       required: true,
     },
+    {
+      name: 'role',
+      type: 'select',
+      required: true,
+      options: ['Student', 'Teacher'],
+    },
     // Email added by default
     // Add more fields as needed
   ],

@@ -21,23 +21,24 @@ export const Multichoices: CollectionConfig = {
       required: true,
     },
     {
-      name: 'answer', // The name of the field
-      type: 'select', // The field type
+      name: 'question',
+      type: 'richText',
       required: true,
-      defaultValue: 'draft',
-      options: [
-        // The predefined choices
+    },
+    {
+      name: 'answer',
+      type: 'array',
+      required: true,
+      fields: [
         {
-          label: 'Draft',
-          value: 'draft',
+          name: 'jawaban',
+          type: 'text',
+          required: true,
         },
         {
-          label: 'Pending Review',
-          value: 'review',
-        },
-        {
-          label: 'Published',
-          value: 'published',
+          name: 'isCorrect',
+          type: 'checkbox',
+          required: true,
         },
       ],
     },
