@@ -40,6 +40,12 @@ export const Multichoices: CollectionConfig = {
           type: 'checkbox',
           required: true,
         },
+        {
+          name: 'score',
+          type: 'number',
+          defaultValue: 0,
+          required: true,
+        },
       ],
     },
   ],

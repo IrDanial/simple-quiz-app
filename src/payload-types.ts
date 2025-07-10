@@ -244,19 +244,11 @@ export interface Trial {
  */
 export interface Answer {
   id: string;
-  Question: string;
-  Answer: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "grades".
- */
-export interface Grade {
-  id: string;
-  Student: string;
-  grade: number;
+  Question: string | Multichoice;
+  AnswerId: string;
+  isCorrect: boolean;
+  score: number;
+  user?: (string | null) | User;
   updatedAt: string;
   createdAt: string;
 }
@@ -286,8 +278,22 @@ export interface Multichoice {
   answer: {
     jawaban: string;
     isCorrect: boolean;
+    score: number;
     id?: string | null;
   }[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "grades".
+ */
+export interface Grade {
+  id: string;
+  user?: (string | null) | User;
+  Question: string | Multichoice;
+  answers?: (string | Answer)[] | null;
+  totalScore: number;
   updatedAt: string;
   createdAt: string;
 }
@@ -473,7 +479,10 @@ export interface TrialsSelect<T extends boolean = true> {
  */
 export interface AnswersSelect<T extends boolean = true> {
   Question?: T;
-  Answer?: T;
+  AnswerId?: T;
+  isCorrect?: T;
+  score?: T;
+  user?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -482,8 +491,10 @@ export interface AnswersSelect<T extends boolean = true> {
  * via the `definition` "grades_select".
  */
 export interface GradesSelect<T extends boolean = true> {
-  Student?: T;
-  grade?: T;
+  user?: T;
+  Question?: T;
+  answers?: T;
+  totalScore?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -500,6 +511,7 @@ export interface MultichoicesSelect<T extends boolean = true> {
     | {
         jawaban?: T;
         isCorrect?: T;
+        score?: T;
         id?: T;
       };
   updatedAt?: T;

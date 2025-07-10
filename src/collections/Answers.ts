@@ -12,13 +12,35 @@ export const Answers: CollectionConfig = {
   fields: [
     {
       name: 'Question',
+      type: 'relationship',
+      required: true,
+      relationTo: 'multichoices',
+    },
+    {
+      name: 'AnswerId',
       type: 'text',
       required: true,
     },
     {
-      name: 'Answer',
-      type: 'text',
+      name: 'isCorrect',
+      type: 'checkbox',
       required: true,
+    },
+    {
+      name: 'score',
+      type: 'number',
+      defaultValue: 0,
+      required: true,
+    },
+    {
+      name: 'user',
+      type: 'relationship',
+      relationTo: 'users',
+      filterOptions: {
+        role: {
+          equals: 'Student',
+        },
+      },
     },
   ],
 }
