@@ -21,7 +21,7 @@ export default function QuizList({ quizzes }: QuizListProps) {
           <Link key={quiz.id} href={`/quiz/${quiz.id}`} className="block">
             <Card className="h-full transition-all duration-200 hover:shadow-lg hover:scale-105 cursor-pointer">
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-center">{quiz.title}</h3>
+                <h3 className="text-lg font-semibold text-center">{quiz.subject}</h3>
               </CardContent>
             </Card>
           </Link>

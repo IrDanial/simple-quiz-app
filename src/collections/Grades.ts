@@ -1,6 +1,5 @@
 import { Grade } from '@/payload-types'
 import type { CollectionConfig, FieldHook } from 'payload'
-import { CollectionBeforeChangeHook } from 'payload'
 
 // const calculateTotalScore: CollectionBeforeChangeHook<Grade> = async ({ data, req }) => {
 //   let totalScore = 0
@@ -40,14 +39,6 @@ import { CollectionBeforeChangeHook } from 'payload'
 
 const calculateTotalScore: FieldHook<Grade, number, Grade> = async ({ data, req }) => {
   let totalScore = 0
-
-  // req
-  // buat fungsi asinkron
-  // gunakan field payload.find filter pake where
-
-  // belajar filter di payload
-  // coba fetch data answer menggunakan object payload yang ada di atas tapi filter supaya fetch answer yang disebut siblingData.answers
-  // loop berdasarkan data yang difetch untuk nambah data di totalscore
 
   if (data?.answers) {
     const answers = await req.payload.find({
