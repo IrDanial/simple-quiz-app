@@ -25,7 +25,7 @@ export default async function HomePage() {
   if (result.user) {
     return (
       <div>
-        <SignOut user={result.user}></SignOut>
+        {/* <SignOut user={result.user}></SignOut> */}
         <QuizList quizzes={quizzesData}></QuizList>
       </div>
     )
