@@ -30,7 +30,3 @@ export default function QuizList({ quizzes }: QuizListProps) {
     </div>
   )
 }
-
-// homepage diubah menjadi quiz list (fetch quizlist kemudian render)
-// bikin page baru di next js yang berada di quiz/quizId (pakai konsep dynamic route segments)
-// di page quizpage fetch data quiz menggunakan payload.findbyId yang dimana Id diambil dari dynamic route segment
