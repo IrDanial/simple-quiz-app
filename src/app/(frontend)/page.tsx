@@ -1,10 +1,8 @@
 import React from 'react'
 
-import SignOut from '@/components/SignOut'
 import { authorizeUser } from '../actions/AuthorizeUser'
 import { redirect } from 'next/navigation'
 import QuizList from '@/components/QuizList'
-// import { Multichoices } from '@/collections/Multichoices'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 
@@ -25,7 +23,6 @@ export default async function HomePage() {
   if (result.user) {
     return (
       <div>
-        {/* <SignOut user={result.user}></SignOut> */}
         <QuizList quizzes={quizzesData}></QuizList>
       </div>
     )

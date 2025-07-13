@@ -1,8 +1,9 @@
 // Import necessary types and functions
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
-import { Multichoice } from '@/payload-types'
 import { notFound } from 'next/navigation'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import MultipleChoiceOptions from '@/components/MultipleChoiceOptions'
 
 interface QuizPageProps {
   params: {
@@ -10,7 +11,7 @@ interface QuizPageProps {
   }
 }
 
-async function fetchQuizById(id: string): Promise<Omit<Multichoice, 'question'> | null> {
+async function fetchQuizById(id: string) {
   try {
     const payload = await getPayload({ config: configPromise })
 
@@ -22,12 +23,6 @@ async function fetchQuizById(id: string): Promise<Omit<Multichoice, 'question'> 
         },
       },
       limit: 1,
-      select: {
-        id: true,
-        title: true,
-        createdAt: true,
-        updatedAt: true,
-      },
     })
 
     if (quizData.docs.length === 0) {
@@ -49,16 +44,14 @@ export default async function QuizPage({ params }: QuizPageProps) {
     return notFound()
   }
 
+  console.log(quiz)
+
   return (
-    <html>
-      <body>
-        <div className="container mx-auto p-6">
-          {/* <h1 className="text-4xl font-bold mb-4">{quiz.title}</h1> */}
-          <h1 className="text-4xl font-bold mb-4">{quiz.subject}</h1>
-          <h1 className="text-4xl font-bold mb-4">{quiz.id}</h1>
-          <p className="text-lg text-muted-foreground mb-8">Test</p>
-        </div>
-      </body>
-    </html>
+    <div className="container mx-auto p-6 flex flex-col gap-y-4">
+      <h1 className="text-4xl font-bold mb-4">{quiz.title}</h1>
+      <h1 className="text-4xl font-bold mb-4">{quiz.subject}</h1>
+      <RichText data={quiz.question} />
+      <MultipleChoiceOptions />
+    </div>
   )
 }
