@@ -5,6 +5,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Button } from './ui/button'
 import type { Multichoice } from '@/payload-types'
 import { useState } from 'react'
+import { saveUserAction } from '@/app/actions/SaveUserAction'
 
 export default function MultipleChoiceOptions({ answer }: { answer: Multichoice['answer'] }) {
   const [chosenAnswerId, setChosenAnswerId] = useState('')
@@ -19,7 +20,7 @@ export default function MultipleChoiceOptions({ answer }: { answer: Multichoice[
         <Label htmlFor={answer.id}>{answer.jawaban}</Label>
       </div>
     )
-  }) // => [answer, answer, answer]
+  })
 
   // Metain dari 1 array ke array lain
   // Petakan dari answer array ke array yang isinya JSX
@@ -48,6 +49,8 @@ export default function MultipleChoiceOptions({ answer }: { answer: Multichoice[
       Hasil akhirnya adalah setelah kamu klik tombol submit, itu akan membuat
       dokumen Answer baru yang isinya sesuai dengan chosenAnswerData
       */
+
+      saveUserAction(chosenAnswerData, '123', '123')
     }
   }
 

@@ -1,38 +1,11 @@
-// Import necessary types and functions
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
 import { notFound } from 'next/navigation'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import MultipleChoiceOptions from '@/components/MultipleChoiceOptions'
+import fetchQuizById from '@/app/actions/FetchQuizData'
 
 interface QuizPageProps {
   params: {
     id: string
-  }
-}
-
-async function fetchQuizById(id: string) {
-  try {
-    const payload = await getPayload({ config: configPromise })
-
-    const quizData = await payload.find({
-      collection: 'multichoices',
-      where: {
-        id: {
-          equals: id,
-        },
-      },
-      limit: 1,
-    })
-
-    if (quizData.docs.length === 0) {
-      return null
-    }
-
-    return quizData.docs[0]
-  } catch (error) {
-    console.error('Error fetching quiz by ID:', error)
-    return null
   }
 }
 
