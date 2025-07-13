@@ -51,7 +51,7 @@ export default async function QuizPage({ params }: QuizPageProps) {
       <h1 className="text-4xl font-bold mb-4">{quiz.title}</h1>
       <h1 className="text-4xl font-bold mb-4">{quiz.subject}</h1>
       <RichText data={quiz.question} />
-      <MultipleChoiceOptions />
+      <MultipleChoiceOptions answer={quiz.answer} />
     </div>
   )
 }
