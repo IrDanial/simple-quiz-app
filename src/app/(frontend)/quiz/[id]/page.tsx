@@ -23,8 +23,9 @@ export default async function QuizPage({ params }: QuizPageProps) {
     <div className="container mx-auto p-6 flex flex-col gap-y-4">
       <h1 className="text-4xl font-bold mb-4">{quiz.title}</h1>
       <h1 className="text-4xl font-bold mb-4">{quiz.subject}</h1>
+      <h1 className="text-4xl font-bold mb-4">{quiz.id}</h1>
       <RichText data={quiz.question} />
-      <MultipleChoiceOptions answer={quiz.answer} />
+      <MultipleChoiceOptions answer={quiz.answer} questionId={quiz.id} />
     </div>
   )
 }

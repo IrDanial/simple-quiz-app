@@ -9,6 +9,10 @@ export const saveUserAction = async (
   questionId: string,
   userId: string,
 ) => {
+  console.log(userId)
+  if (!userId) {
+    console.error('Missing answer or user ID.')
+  }
   const payload = await getPayload({ config })
 
   const update = await payload.create({
@@ -20,6 +24,7 @@ export const saveUserAction = async (
       Question: questionId,
       user: userId,
     },
+    overrideAccess: true,
   })
   return update
 }
