@@ -81,7 +81,7 @@ import { Button } from './ui/button'
 import type { Multichoice } from '@/payload-types'
 import { useState } from 'react'
 import { saveUserAction } from '@/app/actions/SaveUserAction'
-import { redirect, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 interface MultipleChoiceOptionsProps {
   answer: Multichoice['answer']
