@@ -9,12 +9,12 @@ const calculateTotalScore: FieldHook<Grade, number, Grade> = async ({ data, req 
       collection: 'answers',
       where: {
         id: {
-          in: data.answers?.join(','),
+          in: data.answers?.docs?.join(','),
         },
       },
 
       depth: 0,
-      limit: data.answers?.length,
+      limit: data.answers?.docs?.length,
       select: {
         score: true,
       },
@@ -62,9 +62,9 @@ export const Grades: CollectionConfig = {
     {
       name: 'totalScore',
       type: 'number',
-      // hooks: {
-      //   afterRead: [calculateTotalScore],
-      // },
+      hooks: {
+        afterRead: [calculateTotalScore],
+      },
       defaultValue: 0,
       virtual: true,
     },
