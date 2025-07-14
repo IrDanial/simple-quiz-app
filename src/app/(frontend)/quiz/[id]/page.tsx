@@ -12,6 +12,7 @@ interface QuizPageProps {
 export default async function QuizPage({ params }: QuizPageProps) {
   const { id } = params
   const quiz = await fetchQuizById(id)
+  // const userId = await FetchUserId(session, 'ss')
 
   if (!quiz) {
     return notFound()

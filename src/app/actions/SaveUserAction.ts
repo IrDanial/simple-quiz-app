@@ -3,13 +3,13 @@
 import { Multichoice } from '@/payload-types'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import { authorizeUser } from './AuthorizeUser'
 
-export const saveUserAction = async (
-  data: Multichoice['answer'][number],
-  questionId: string,
-  userId: string,
-) => {
-  console.log(userId)
+export const saveUserAction = async (data: Multichoice['answer'][number], questionId: string) => {
+  const userID = await authorizeUser()
+  const userId = userID.user?.id
+  console.log('User ID:', userId)
+
   if (!userId) {
     console.error('Missing answer or user ID.')
   }

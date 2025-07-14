@@ -82,10 +82,6 @@ import type { Multichoice } from '@/payload-types'
 import { useState } from 'react'
 import { saveUserAction } from '@/app/actions/SaveUserAction'
 
-const useUser = () => {
-  return { userId: 'user_from_auth_session' }
-}
-
 interface MultipleChoiceOptionsProps {
   answer: Multichoice['answer']
   questionId: string
@@ -93,8 +89,6 @@ interface MultipleChoiceOptionsProps {
 
 export default function MultipleChoiceOptions({ answer, questionId }: MultipleChoiceOptionsProps) {
   const [chosenAnswerId, setChosenAnswerId] = useState<string | null>(null)
-
-  const { userId } = useUser()
 
   const radioItems = answer.map((ans) => {
     if (!ans.id) {
@@ -109,7 +103,7 @@ export default function MultipleChoiceOptions({ answer, questionId }: MultipleCh
   })
 
   const onSubmitClick = () => {
-    if (!chosenAnswerId || !userId) {
+    if (!chosenAnswerId) {
       console.error('Missing answer or user ID.')
       return
     }
@@ -117,10 +111,10 @@ export default function MultipleChoiceOptions({ answer, questionId }: MultipleCh
     const chosenAnswerData = answer.find((ans) => ans.id === chosenAnswerId)
 
     if (chosenAnswerData) {
-      console.log(`Submitting for User: ${userId}, Question: ${questionId}`)
+      console.log(`Question: ${questionId}`)
       console.log('Answer Data:', chosenAnswerData)
 
-      saveUserAction(chosenAnswerData, questionId, userId)
+      saveUserAction(chosenAnswerData, questionId)
     }
   }
 
