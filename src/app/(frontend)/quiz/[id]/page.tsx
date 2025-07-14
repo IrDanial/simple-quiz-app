@@ -4,13 +4,13 @@ import MultipleChoiceOptions from '@/components/MultipleChoiceOptions'
 import fetchQuizById from '@/app/actions/FetchQuizData'
 
 interface QuizPageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export default async function QuizPage({ params }: QuizPageProps) {
-  const { id } = params
+  const { id } = await params
   const quiz = await fetchQuizById(id)
   // const userId = await FetchUserId(session, 'ss')
 

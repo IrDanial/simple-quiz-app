@@ -6,15 +6,15 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
 interface QuizPageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export default async function Result({ params }: QuizPageProps) {
   const userID = await authorizeUser()
   const userId = userID.user?.id
-  const { id } = params
+  const { id } = await params
 
   if (!userId) {
     redirect('/')

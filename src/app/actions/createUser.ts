@@ -16,6 +16,7 @@ export const createUser = async (data: { fullname: string; email: string; passwo
         fullName: data.fullname,
         email: data.email,
         password: data.password,
+        role: 'Student',
       },
     })
 
