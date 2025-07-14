@@ -81,6 +81,7 @@ import { Button } from './ui/button'
 import type { Multichoice } from '@/payload-types'
 import { useState } from 'react'
 import { saveUserAction } from '@/app/actions/SaveUserAction'
+import { redirect, useRouter } from 'next/navigation'
 
 interface MultipleChoiceOptionsProps {
   answer: Multichoice['answer']
@@ -102,7 +103,9 @@ export default function MultipleChoiceOptions({ answer, questionId }: MultipleCh
     )
   })
 
-  const onSubmitClick = () => {
+  const router = useRouter()
+
+  const onSubmitClick = async () => {
     if (!chosenAnswerId) {
       console.error('Missing answer or user ID.')
       return
@@ -114,7 +117,8 @@ export default function MultipleChoiceOptions({ answer, questionId }: MultipleCh
       console.log(`Question: ${questionId}`)
       console.log('Answer Data:', chosenAnswerData)
 
-      saveUserAction(chosenAnswerData, questionId)
+      await saveUserAction(chosenAnswerData, questionId)
+      router.replace(`/quiz/${questionId}/result`)
     }
   }
 
