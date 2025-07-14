@@ -1,4 +1,34 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig, FieldHook } from 'payload'
+
+const selectGrade: FieldHook = async ({ data, req }) => {
+  if (data && data.user && data.Question) {
+    const existingGrade = await req.payload.find({
+      collection: 'grades',
+      where: {
+        user: {
+          equals: data.user,
+        },
+        Question: {
+          equals: data.Question,
+        },
+      },
+    })
+    const firstData = existingGrade.docs[0]
+    if (firstData) {
+      return firstData.id
+    }
+
+    const newGrade = await req.payload.create({
+      collection: 'grades',
+      data: {
+        user: data.user,
+        Question: data.Question,
+      },
+    })
+    return newGrade.id
+  }
+  return ''
+}
 
 export const Answers: CollectionConfig = {
   slug: 'answers',
@@ -40,6 +70,14 @@ export const Answers: CollectionConfig = {
         role: {
           equals: 'Student',
         },
+      },
+    },
+    {
+      name: 'grade',
+      type: 'relationship',
+      relationTo: 'grades',
+      hooks: {
+        beforeChange: [selectGrade],
       },
     },
   ],

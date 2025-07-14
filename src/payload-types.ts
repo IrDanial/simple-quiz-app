@@ -81,7 +81,11 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    grades: {
+      answers: 'answers';
+    };
+  };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     essays: EssaysSelect<false> | EssaysSelect<true>;
@@ -249,6 +253,7 @@ export interface Answer {
   isCorrect: boolean;
   score: number;
   user?: (string | null) | User;
+  grade?: (string | null) | Grade;
   updatedAt: string;
   createdAt: string;
 }
@@ -292,8 +297,12 @@ export interface Grade {
   id: string;
   user?: (string | null) | User;
   Question: string | Multichoice;
-  answers?: (string | Answer)[] | null;
-  totalScore: number;
+  answers?: {
+    docs?: (string | Answer)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  totalScore?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -483,6 +492,7 @@ export interface AnswersSelect<T extends boolean = true> {
   isCorrect?: T;
   score?: T;
   user?: T;
+  grade?: T;
   updatedAt?: T;
   createdAt?: T;
 }
